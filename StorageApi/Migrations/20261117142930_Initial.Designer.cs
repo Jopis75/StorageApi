@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StorageApi.DbContexts;
 
@@ -9,15 +10,12 @@ using StorageApi.DbContexts;
 
 namespace StorageApi.Migrations;
 
-[DbContext(typeof(StorageContext))]
-partial class StorageContextModelSnapshot : ModelSnapshot
+[DbContext(typeof(StorageDbContext))]
+[Migration("20261117142930_Initial")]
+partial class _20261117142930_Initial
 {
-    // If you encounter a merge conflict in the line below, it means you need to
-    // discard one of the migration branches and recreate its migrations on top of
-    // the other branch. See https://aka.ms/efcore-docs-migrations-conflicts for more info.
-    public override string LastMigrationId => "20261117130308_Initial";
-
-    protected override void BuildModel(ModelBuilder modelBuilder)
+    /// <inheritdoc />
+    protected override void BuildTargetModel(ModelBuilder modelBuilder)
     {
 #pragma warning disable 612, 618
         modelBuilder
@@ -59,6 +57,38 @@ partial class StorageContextModelSnapshot : ModelSnapshot
                 b.HasKey("Id");
 
                 b.ToTable("Product");
+
+                b.HasData(
+                    new
+                    {
+                        Id = 1,
+                        Category = "Category 1",
+                        Count = 100,
+                        Description = "Description 1",
+                        Name = "Product 1",
+                        Price = 10,
+                        Shelf = "Shelf 1"
+                    },
+                    new
+                    {
+                        Id = 2,
+                        Category = "Category 2",
+                        Count = 200,
+                        Description = "Description 2",
+                        Name = "Product 2",
+                        Price = 20,
+                        Shelf = "Shelf 2"
+                    },
+                    new
+                    {
+                        Id = 3,
+                        Category = "Category 3",
+                        Count = 300,
+                        Description = "Description 3",
+                        Name = "Product 3",
+                        Price = 30,
+                        Shelf = "Shelf 3"
+                    });
             });
 #pragma warning restore 612, 618
     }

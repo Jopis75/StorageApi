@@ -1,13 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using StorageApi.Configurations;
 using StorageApi.Models;
 
 namespace StorageApi.DbContexts
 {
-    public class StorageContext : DbContext
+    public class StorageDbContext : DbContext
     {
         public DbSet<Product> Products { get; set; }
 
-        public StorageContext(DbContextOptions<StorageContext> dbContextOptions)
+        public StorageDbContext(DbContextOptions<StorageDbContext> dbContextOptions)
             : base(dbContextOptions)
         {
         }
@@ -23,7 +24,10 @@ namespace StorageApi.DbContexts
                .ToTable("Product");
             modelBuilder
                 .Entity<Product>()
-                .HasKey(product => product.Id); 
+                .HasKey(product => product.Id);
+
+            // Configurations.
+            modelBuilder.ApplyConfiguration(new ProductConfiguration());
         }
     }
 }

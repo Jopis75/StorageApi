@@ -7,8 +7,8 @@ namespace StorageApi.Extensions
     {
         public static IServiceCollection AddDbContext(this IServiceCollection serviceCollection, IConfiguration configuration)
         {
-            Action<DbContextOptionsBuilder> dbContextOptionsBuilder = dbContextOptionsBuilder => dbContextOptionsBuilder.UseSqlServer(configuration.GetConnectionString("StorageConnectionString"));
-            serviceCollection.AddDbContext<StorageContext>(dbContextOptionsBuilder);
+            Action<DbContextOptionsBuilder> dbContextOptionsBuilder = dbContextOptionsBuilder => dbContextOptionsBuilder.UseSqlServer(configuration.GetConnectionString("StorageDbContextConnectionString"));
+            serviceCollection.AddDbContext<StorageDbContext>(dbContextOptionsBuilder);
             return serviceCollection;
         }
     }

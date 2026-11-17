@@ -2,10 +2,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace StorageApi.Migrations;
 
 /// <inheritdoc />
-public partial class _20261117130308_Initial : Migration
+public partial class _20261117142930_Initial : Migration
 {
     /// <inheritdoc />
     protected override void Up(MigrationBuilder migrationBuilder)
@@ -26,6 +28,16 @@ public partial class _20261117130308_Initial : Migration
             constraints: table =>
             {
                 table.PrimaryKey("PK_Product", x => x.Id);
+            });
+
+        migrationBuilder.InsertData(
+            table: "Product",
+            columns: new[] { "Id", "Category", "Count", "Description", "Name", "Price", "Shelf" },
+            values: new object[,]
+            {
+                { 1, "Category 1", 100, "Description 1", "Product 1", 10, "Shelf 1" },
+                { 2, "Category 2", 200, "Description 2", "Product 2", 20, "Shelf 2" },
+                { 3, "Category 3", 300, "Description 3", "Product 3", 30, "Shelf 3" }
             });
     }
 
