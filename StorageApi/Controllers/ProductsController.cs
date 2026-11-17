@@ -1,43 +1,100 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using StorageApi.Models;
+using StorageApi.DbContexts;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
-namespace StorageApi.Controllers
+[Route("api/[controller]")]
+[ApiController]
+public class ProductsController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ProductsController : ControllerBase
+    private readonly StorageContext _context;
+
+    public ProductsController(StorageContext context)
     {
-        // GET: api/<ProductsController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        _context = context;
+    }
+
+    // GET: api/Product
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<Product>>> GetProduct()
+    {
+        return await _context.Products.ToListAsync();
+    }
+
+    // GET: api/Product/5
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Product>> GetProduct(int id)
+    {
+        var product = await _context.Products.FindAsync(id);
+
+        if (product == null)
         {
-            return new string[] { "value1", "value2" };
+            return NotFound();
         }
 
-        // GET api/<ProductsController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        return product;
+    }
+
+    // PUT: api/Product/5
+    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutProduct(int? id, Product product)
+    {
+        if (id != product.Id)
         {
-            return "value";
+            return BadRequest();
         }
 
-        // POST api/<ProductsController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        _context.Entry(product).State = EntityState.Modified;
+
+        try
         {
+            await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!ProductExists(id))
+            {
+                return NotFound();
+            }
+            else
+            {
+                throw;
+            }
         }
 
-        // PUT api/<ProductsController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        return NoContent();
+    }
+
+    // POST: api/Product
+    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    [HttpPost]
+    public async Task<ActionResult<Product>> PostProduct(Product product)
+    {
+        _context.Products.Add(product);
+        await _context.SaveChangesAsync();
+
+        return CreatedAtAction("GetProduct", new { id = product.Id }, product);
+    }
+
+    // DELETE: api/Product/5
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteProduct(int? id)
+    {
+        var product = await _context.Products.FindAsync(id);
+        if (product == null)
         {
+            return NotFound();
         }
 
-        // DELETE api/<ProductsController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        _context.Products.Remove(product);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
+
+    private bool ProductExists(int? id)
+    {
+        return _context.Products.Any(e => e.Id == id);
     }
 }
