@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace StorageApi.Migrations;
 
 /// <inheritdoc />
-public partial class _20261117142930_Initial : Migration
+public partial class _20261118155707_Initial : Migration
 {
     /// <inheritdoc />
     protected override void Up(MigrationBuilder migrationBuilder)
@@ -35,9 +35,9 @@ public partial class _20261117142930_Initial : Migration
             columns: new[] { "Id", "Category", "Count", "Description", "Name", "Price", "Shelf" },
             values: new object[,]
             {
-                { 1, "Category 1", 100, "Description 1", "Product 1", 10, "Shelf 1" },
-                { 2, "Category 2", 200, "Description 2", "Product 2", 20, "Shelf 2" },
-                { 3, "Category 3", 300, "Description 3", "Product 3", 30, "Shelf 3" }
+                { 1, "GPU", 10, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "PRIME GeForce RTX™ 5080", 19700, "Shelf 1" },
+                { 2, "Console", 25, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "PlayStation®5 Pro", 11900, "Shelf 2" },
+                { 3, "Gaming Headset", 100, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "ASUS ROG Delta II", 2989, "Shelf 3" }
             });
     }
 

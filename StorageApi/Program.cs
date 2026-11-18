@@ -1,5 +1,5 @@
 using StorageApi.Extensions;
-using Microsoft.EntityFrameworkCore;
+using StorageApi.Profiles;
 
 namespace StorageApi
 {
@@ -8,9 +8,11 @@ namespace StorageApi
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            
+
             // Add services to the container.
             builder.Services.AddDbContext(builder.Configuration);
+            builder.Services.AddAutoMapper();
+            builder.Services.AddValidators();
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();

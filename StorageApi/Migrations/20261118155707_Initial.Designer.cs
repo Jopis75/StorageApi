@@ -11,8 +11,8 @@ using StorageApi.DbContexts;
 namespace StorageApi.Migrations;
 
 [DbContext(typeof(StorageDbContext))]
-[Migration("20261117142930_Initial")]
-partial class _20261117142930_Initial
+[Migration("20261118155707_Initial")]
+partial class _20261118155707_Initial
 {
     /// <inheritdoc />
     protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -62,31 +62,31 @@ partial class _20261117142930_Initial
                     new
                     {
                         Id = 1,
-                        Category = "Category 1",
-                        Count = 100,
-                        Description = "Description 1",
-                        Name = "Product 1",
-                        Price = 10,
+                        Category = "GPU",
+                        Count = 10,
+                        Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                        Name = "PRIME GeForce RTX™ 5080",
+                        Price = 19700,
                         Shelf = "Shelf 1"
                     },
                     new
                     {
                         Id = 2,
-                        Category = "Category 2",
-                        Count = 200,
-                        Description = "Description 2",
-                        Name = "Product 2",
-                        Price = 20,
+                        Category = "Console",
+                        Count = 25,
+                        Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                        Name = "PlayStation®5 Pro",
+                        Price = 11900,
                         Shelf = "Shelf 2"
                     },
                     new
                     {
                         Id = 3,
-                        Category = "Category 3",
-                        Count = 300,
-                        Description = "Description 3",
-                        Name = "Product 3",
-                        Price = 30,
+                        Category = "Gaming Headset",
+                        Count = 100,
+                        Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                        Name = "ASUS ROG Delta II",
+                        Price = 2989,
                         Shelf = "Shelf 3"
                     });
             });

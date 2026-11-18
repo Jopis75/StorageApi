@@ -12,32 +12,32 @@ namespace StorageApi.Configurations
                 new Product
                 {
                     Id = 1,
-                    Name = "Product 1",
-                    Price = 10,
-                    Category = "Category 1",
+                    Name = "PRIME GeForce RTX™ 5080",
+                    Price = 19700,
+                    Category = "GPU",
                     Shelf = "Shelf 1",
-                    Count = 100,
-                    Description = "Description 1"
+                    Count = 10,
+                    Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
                 },
                 new Product
                 {
                     Id = 2,
-                    Name = "Product 2",
-                    Price = 20,
-                    Category = "Category 2",
+                    Name = "PlayStation®5 Pro",
+                    Price = 11900,
+                    Category = "Console",
                     Shelf = "Shelf 2",
-                    Count = 200,
-                    Description = "Description 2"
+                    Count = 25,
+                    Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
                 },
                 new Product
                 {
                     Id = 3,
-                    Name = "Product 3",
-                    Price = 30,
-                    Category = "Category 3",
+                    Name = "ASUS ROG Delta II",
+                    Price = 2989,
+                    Category = "Gaming Headset",
                     Shelf = "Shelf 3",
-                    Count = 300,
-                    Description = "Description 3"
+                    Count = 100,
+                    Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
                 }
             );
         }
