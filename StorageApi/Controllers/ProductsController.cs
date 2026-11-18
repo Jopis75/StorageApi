@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using StorageApi.Models;
 using StorageApi.DbContexts;
 using StorageApi.Dtos;
+using StorageApi.Models;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -17,10 +17,11 @@ public class ProductsController : ControllerBase
 
     // GET: api/Product
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Product>>> GetProduct()
+    [Route("GetAll")]
+    public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
     {
         var products = await _context.Products.ToListAsync();
-        
+
         return Ok(products.Select(p => new ProductDto
         {
             Id = p.Id,
@@ -54,6 +55,44 @@ public class ProductsController : ControllerBase
             Count = product.Count,
             Description = product.Description
         });
+    }
+
+    //  GET: /api/products/stats
+    [HttpGet]
+    [Route("Stats")]
+    public async Task<ActionResult<StatsDto>> GetStats()
+    {
+        var totalProductCount = await _context.Products.SumAsync(p => p.Count);
+        var totalStoragePrice = await _context.Products.SumAsync(p => p.Count * p.Price);
+        var averagePrice = await _context.Products.AverageAsync(p => p.Price);
+
+        return Ok(new StatsDto
+        {
+            TotalProductCount = totalProductCount,
+            TotalStoragePrice = totalStoragePrice,
+            AveragePrice = averagePrice
+        });
+    }
+
+    // GET: /api/products/?category=KategoriNamn
+    [HttpGet]
+    [Route("GetByCategory")]
+    public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts([FromQuery] string category)
+    {
+        var products = await _context.Products.Where(p => p.Category.Equals(category)).ToListAsync();
+
+        var productDtos = products.Select(p => new ProductDto
+        {
+            Id = p.Id,
+            Name = p.Name,
+            Price = p.Price,
+            Category = p.Category,
+            Shelf = p.Shelf,
+            Count = p.Count,
+            Description = p.Description
+        });
+
+        return Ok(productDtos);
     }
 
     // PUT: api/Product/5
