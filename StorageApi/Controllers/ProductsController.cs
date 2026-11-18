@@ -81,7 +81,7 @@ public class ProductsController : ControllerBase
     {
         var products = await _context.Products.Where(p => p.Category.Equals(category)).ToListAsync();
 
-        var productDtos = products.Select(p => new ProductDto
+        return Ok(products.Select(p => new ProductDto
         {
             Id = p.Id,
             Name = p.Name,
@@ -90,9 +90,7 @@ public class ProductsController : ControllerBase
             Shelf = p.Shelf,
             Count = p.Count,
             Description = p.Description
-        });
-
-        return Ok(productDtos);
+        }));
     }
 
     // PUT: api/Product/5
