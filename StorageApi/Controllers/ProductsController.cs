@@ -133,22 +133,13 @@ public class ProductsController(StorageDbContext context, IMapper mapper, IValid
             var ex = new ValidationException(validationResult.Errors);
             return BadRequest(ex.Message);
         }
-        
-        var product = await context.Products.FindAsync(updateProductDto.Id);
 
-        if (product == null)
+        if (!ProductExists(updateProductDto.Id))
         {
             return NotFound();
         }
 
-        //product = mapper.Map<Product>(updateProductDto);
-
-        product.Name = updateProductDto.Name;
-        product.Price = updateProductDto.Price;
-        product.Count = updateProductDto.Count;
-        product.Category = updateProductDto.Category;
-        product.Shelf = updateProductDto.Shelf;
-        product.Description = updateProductDto.Description;
+        var product = mapper.Map<Product>(updateProductDto);
 
         context.Entry(product).State = EntityState.Modified;
 
