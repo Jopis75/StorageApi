@@ -141,7 +141,14 @@ public class ProductsController(StorageDbContext context, IMapper mapper, IValid
             return NotFound();
         }
 
-        product = mapper.Map<Product>(updateProductDto);
+        //product = mapper.Map<Product>(updateProductDto);
+
+        product.Name = updateProductDto.Name;
+        product.Price = updateProductDto.Price;
+        product.Count = updateProductDto.Count;
+        product.Category = updateProductDto.Category;
+        product.Shelf = updateProductDto.Shelf;
+        product.Description = updateProductDto.Description;
 
         context.Entry(product).State = EntityState.Modified;
 
