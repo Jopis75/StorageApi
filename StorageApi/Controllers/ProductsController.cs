@@ -32,7 +32,7 @@ public class ProductsController(StorageDbContext context, IMapper mapper, IValid
 
         await context.SaveChangesAsync();
 
-        return CreatedAtAction("ReadByIdAsync", new { id = product.Id }, createProductDto);
+        return CreatedAtAction(nameof(ReadByIdAsync), new { id = product.Id }, createProductDto);
     }
 
     // DELETE: api/Product/DeleteAsync/5
@@ -85,6 +85,7 @@ public class ProductsController(StorageDbContext context, IMapper mapper, IValid
     // GET: api/Product/ReadByIdAsync/5
     [HttpGet]
     [Route("ReadByIdAsync/{id}")]
+    [ActionName(nameof(ReadByIdAsync))]
     [ProducesResponseType(typeof(ProductDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<ProductDto>> ReadByIdAsync(int id)
